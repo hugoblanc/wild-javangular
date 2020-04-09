@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.wildapi.api.services.user.User;
+import com.wildapi.api.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +19,16 @@ public class OAuthController {
     @Autowired
     OAuthService oAuthService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping()
     Object setupOAuth(@RequestParam(name = "code") String code){
         System.out.println("Le super code renvoyé");
         System.out.println(code);
 
-        return this.oAuthService.handleOAuthCallback(code);
+        User user = this.oAuthService.handleOAuthCallback(code);
+        return userService.saveUser(user);
     }
 
     @GetMapping("/odyssey")
@@ -35,4 +41,6 @@ public class OAuthController {
             e.printStackTrace();
         }
     }
+
+    
 }
