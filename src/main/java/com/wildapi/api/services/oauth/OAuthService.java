@@ -23,6 +23,7 @@ public class OAuthService {
 
         AskAuthorizationDto askAuth = this.createAskAuthorizationFromCode(code);
 
+
         AuthResponseDto authResponse = this.restService.postObject("https://odyssey.wildcodeschool.com/oauth/token", askAuth, AuthResponseDto.class);
         System.out.println(authResponse);
         ResponseEntity<OdysseyUserDto> odysseyUserDtoResponseEntity = this.restService.getObject( "https://odyssey.wildcodeschool.com/api/v2/me", OdysseyUserDto.class,authResponse.getAccess_token());
@@ -32,6 +33,7 @@ public class OAuthService {
 
 
     AskAuthorizationDto createAskAuthorizationFromCode(String code){
+
         AskAuthorizationDto askAuth = new AskAuthorizationDto(
         "http://localhost:8080/oauth"    
         , "authorization_code",System.getenv("odyssey_secret"), "fc3dfb1962ce7fcdb7b7958e9c6928e78ed030deb8462f7ef9e8db5f47301b5c", code);
