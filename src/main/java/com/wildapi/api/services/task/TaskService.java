@@ -1,7 +1,9 @@
 package com.wildapi.api.services.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,6 +19,18 @@ public class TaskService {
 
     public Task save(Task task){
         return repository.save(task);
+    }
+
+
+    public Task update(Task task, Long id){
+        if(task.getId() != id){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Inconsistent parameter");
+        }
+        return repository.save(task);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 
 
