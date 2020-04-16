@@ -1,6 +1,7 @@
 package com.wildapi.api.services.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class TaskController {
 
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable("id") Long id){
         service.delete(id);
     }
