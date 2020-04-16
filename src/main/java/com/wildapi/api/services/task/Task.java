@@ -1,8 +1,8 @@
 package com.wildapi.api.services.task;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.wildapi.api.services.daybook.Daybook;
+
+import javax.persistence.*;
 
 @Entity
 public class Task {
@@ -14,6 +14,11 @@ public class Task {
     private String title;
 
     private int importance;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "daybook_id")
+    private Daybook daybook;
+
 
     public Long getId() {
         return id;
