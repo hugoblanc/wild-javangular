@@ -2,10 +2,9 @@ package com.wildapi.api.services.algo;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;// int en java -2,147,483,647 to 2,147,483,647 et en C -32,768 to +32,767
+import javax.persistence.*;
 
+import com.wildapi.api.services.battle.Battle;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -31,6 +30,9 @@ public class Algo {
     @UpdateTimestamp
     private Date modifyDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Battle battle;
 
     
     public Long getId() {
@@ -89,7 +91,11 @@ public class Algo {
         this.modifyDate = modifyDate;
     }
 
+    public Battle getBattle() {
+        return battle;
+    }
 
-
-    
+    public void setBattle(Battle battle) {
+        this.battle = battle;
+    }
 }
