@@ -1,5 +1,6 @@
 package com.wildapi.api.services.task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildapi.api.services.daybook.Daybook;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Task {
 
     private int importance;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "daybook_id")
     private Daybook daybook;
