@@ -17,7 +17,7 @@ public class Daybook {
     private Long id;
 
 
-    private Date launchDate;
+    private Date date;
 
     private boolean validated;
 
@@ -43,12 +43,12 @@ public class Daybook {
     }
 
 
-    public Date getLaunchDate() {
-        return launchDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setLaunchDate(Date launchDate) {
-        this.launchDate = launchDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public boolean isValidated() {
