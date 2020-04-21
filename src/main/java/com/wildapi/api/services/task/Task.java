@@ -1,5 +1,6 @@
 package com.wildapi.api.services.task;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildapi.api.services.daybook.Daybook;
 
@@ -16,7 +17,7 @@ public class Task {
 
     private int importance;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "daybook_id")
     private Daybook daybook;

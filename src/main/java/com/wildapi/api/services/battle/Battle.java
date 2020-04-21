@@ -1,5 +1,6 @@
 package com.wildapi.api.services.battle;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.algo.Algo;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Battle {
 
     public Duration duration;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "battle")
     public List<Algo> algoList;
 

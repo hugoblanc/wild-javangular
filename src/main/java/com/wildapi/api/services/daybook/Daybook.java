@@ -1,11 +1,9 @@
 package com.wildapi.api.services.daybook;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.task.Task;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +21,8 @@ public class Daybook {
 
     private boolean finished;
 
-    @OneToMany(mappedBy = "daybook")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "daybook", cascade = CascadeType.ALL)
     private List<Task> taskList;
 
     public Long getId() {
