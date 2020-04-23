@@ -17,6 +17,8 @@ public class Task {
 
     private int importance;
 
+    private boolean taskChecked;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "daybook_id")
@@ -45,5 +47,21 @@ public class Task {
 
     public void setImportance(int importance) {
         this.importance = importance;
+    }
+
+    public boolean isTaskChecked() {
+        return taskChecked;
+    }
+
+    public void setTaskChecked(boolean taskChecked) {
+        this.taskChecked = taskChecked;
+    }
+
+    public Daybook getDaybook() {
+        return daybook;
+    }
+
+    public void setDaybook(Daybook daybook) {
+        this.daybook = daybook;
     }
 }

@@ -17,6 +17,8 @@ public class Daybook {
 
     private Date date;
 
+    private String theme;
+
     private boolean validated;
 
     private boolean finished;
@@ -48,6 +50,15 @@ public class Daybook {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 
     public boolean isValidated() {
