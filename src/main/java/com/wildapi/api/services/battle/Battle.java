@@ -25,7 +25,7 @@ public class Battle {
     public Duration duration;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "battle")
+    @OneToMany(mappedBy = "battle", cascade = CascadeType.PERSIST)
     public List<Algo> algoList;
 
     public Long getId() {

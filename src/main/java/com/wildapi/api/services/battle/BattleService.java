@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,7 +18,20 @@ public class BattleService {
         return repository.findAll();
     }
 
-    public Battle save(Battle battle) { return repository.save(battle); }
+    public Battle save(Battle battle) {
+        battle.algoList = initEmptyAlgo(5);
+        return repository.save(battle);
+    }
+
+    private List<Algo> initEmptyAlgo(int nbAlgo){
+        List<Algo> algos = new ArrayList<>();
+        for (int i = 0; i < nbAlgo; i++) {
+            Algo algo = new Algo();
+            algo.setTitle("Algo "+i);
+            algos.add(algo);
+        }
+        return algos;
+    }
 
     public Battle update(Battle battle, Long id) {
         if(battle.getId() != id){

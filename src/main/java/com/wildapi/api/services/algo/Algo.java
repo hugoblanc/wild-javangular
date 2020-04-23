@@ -37,6 +37,8 @@ public class Algo {
     @JoinColumn(name = "battle_id")
     private Battle battle;
 
+
+
     
     public Long getId() {
         return id;
