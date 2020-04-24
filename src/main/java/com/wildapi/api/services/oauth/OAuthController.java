@@ -1,9 +1,6 @@
 package com.wildapi.api.services.oauth;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.wildapi.api.core.security.jwt.JwtUtil;
 import com.wildapi.api.services.user.User;
 import com.wildapi.api.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("oauth")
@@ -22,12 +22,28 @@ public class OAuthController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
+
     @GetMapping()
-    Object setupOAuth(@RequestParam(name = "code") String code){
+    Object setupOAuth(@RequestParam(name = "code") String code, HttpServletResponse httpResponse) {
         System.out.println("Le super code renvoyé");
         System.out.println(code);
 
         User user = this.oAuthService.handleOAuthCallback(code);
+
+        String token = jwtUtil.generateToken(user);
+
+        try {
+            httpResponse.sendRedirect(
+                    "http://localhost:4200/auth/" + token);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
         return userService.saveUser(user);
     }
 
