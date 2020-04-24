@@ -1,9 +1,11 @@
 package com.wildapi.api.services.daybook;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -14,8 +16,11 @@ public class DaybookController {
     DaybookService service;
 
     @GetMapping()
-    public List<Daybook> getDaybooks(){
-        return service.getAll();
+    public List<Daybook> getDaybooks(@RequestParam(name = "start", required = false) @DateTimeFormat(pattern = "MMddyyyy") Date startDate, @RequestParam(name = "end", required = false) @DateTimeFormat(pattern = "MMddyyyy") Date endDate) {
+
+        System.out.println(startDate.toString());
+        System.out.println(endDate.toString());
+        return service.getAll(startDate, endDate);
     }
 
 
