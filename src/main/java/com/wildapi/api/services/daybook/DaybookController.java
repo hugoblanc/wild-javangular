@@ -28,7 +28,7 @@ public class DaybookController {
 
     @PutMapping("/{id}")
     public Daybook putDaybook(@RequestBody Daybook daybook, @PathVariable(value = "id") Long id) {
-        return service.update(daybook);
+        return service.update(daybook, id);
     }
 
 
