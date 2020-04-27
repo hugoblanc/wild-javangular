@@ -26,15 +26,15 @@ public class DaybookController {
         return service.save(daybook);
     }
 
-    @PutMapping("/{id}")
-    public Daybook putDaybook(@PathVariable("id") Long id, @RequestBody Daybook daybook) {
-        return service.update(daybook, id);
+    @PutMapping()
+    public Daybook putDaybook(@RequestBody Daybook daybook) {
+        return service.update(daybook);
     }
 
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteDaybook(@PathVariable("id") Long id){
+    public void deleteDaybook(@PathVariable("id") Long id) {
         service.delete(id);
     }
 }
