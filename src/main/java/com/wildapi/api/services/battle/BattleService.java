@@ -33,6 +33,11 @@ public class BattleService {
     }
 
     public Battle update(Battle battle, Long id) {
+        System.out.println(id);
+        System.out.println(battle.getId());
+        if (battle.getId().equals(id)) {
+            System.out.println("Is equal");
+        }
         return repository.save(battle);
     }
 

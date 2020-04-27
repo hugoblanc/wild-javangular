@@ -24,14 +24,14 @@ public class BattleController {
     }
 
     @PutMapping("/{id}")
-    public Battle putBattle(@PathVariable(value = "id") Long id, @RequestBody Battle battle) {
+    public Battle putBattle(@PathVariable(value = "id") long id, @RequestBody Battle battle) {
         return service.update(battle, id);
     }
 
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteBattle(@PathVariable(value = "id") Long id) {
+    public void deleteBattle(@PathVariable(value = "id") long id) {
         service.delete(id);
     }
 }

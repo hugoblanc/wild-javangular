@@ -22,13 +22,13 @@ public class AlgoController {
     }
 
     @PutMapping("/{id}")
-    public Algo updateAlgo(@RequestBody Algo algo, @PathVariable(value = "id") Long id) {
+    public Algo updateAlgo(@RequestBody Algo algo, @PathVariable(value = "id") long id) {
         return service.update(algo);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteAlgo(@PathVariable(value = "id") Long id) {
+    public void deleteAlgo(@PathVariable(value = "id") long id) {
         service.delete(id);
     }
 }
