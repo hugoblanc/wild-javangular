@@ -25,14 +25,14 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public Task putTask(@PathVariable("id") Long id, @RequestBody Task task) {
+    public Task putTask(@PathVariable(value = "id") Long id, @RequestBody Task task) {
         return service.update(task, id);
     }
 
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteTask(@PathVariable("id") Long id){
+    public void deleteTask(@PathVariable(value = "id") Long id) {
         service.delete(id);
     }
 

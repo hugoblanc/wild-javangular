@@ -26,11 +26,6 @@ public class AlgoController {
         return service.update(algo);
     }
 
-    @PutMapping()
-    public Algo updateAlgoS(@RequestBody Algo algo) {
-        return service.update(algo);
-    }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteAlgo(@PathVariable(value = "id") Long id) {

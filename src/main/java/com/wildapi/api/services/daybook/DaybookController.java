@@ -34,7 +34,7 @@ public class DaybookController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteDaybook(@PathVariable("id") Long id) {
+    public void deleteDaybook(@PathVariable(value = "id") Long id) {
         service.delete(id);
     }
 }
