@@ -1,7 +1,6 @@
 package com.wildapi.api.services.oauth;
 
 import com.wildapi.api.core.RestService;
-
 import com.wildapi.api.services.oauth.dto.AskAuthorizationDto;
 import com.wildapi.api.services.oauth.dto.AuthResponseDto;
 import com.wildapi.api.services.oauth.dto.OdysseyUserDto;
@@ -23,6 +22,7 @@ public class OAuthService {
 
         AskAuthorizationDto askAuth = this.createAskAuthorizationFromCode(code);
 
+        System.out.println(askAuth);
 
         AuthResponseDto authResponse = this.restService.postObject("https://odyssey.wildcodeschool.com/oauth/token", askAuth, AuthResponseDto.class);
         System.out.println(authResponse);
