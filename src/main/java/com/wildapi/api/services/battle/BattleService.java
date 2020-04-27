@@ -35,7 +35,7 @@ public class BattleService {
     }
 
     public Battle update(Battle battle, Long id) {
-        if(battle.getId() != id){
+        if (battle.getId().equals(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Inconsistent parameter");
         }
         return repository.save(battle);

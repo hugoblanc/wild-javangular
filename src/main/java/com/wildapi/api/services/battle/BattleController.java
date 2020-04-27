@@ -31,7 +31,7 @@ public class BattleController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteBattle(@PathVariable("id") Long id){
+    public void deleteBattle(@PathVariable(value = "id") Long id) {
         service.delete(id);
     }
 }
