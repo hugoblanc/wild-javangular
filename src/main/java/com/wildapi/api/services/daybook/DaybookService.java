@@ -26,7 +26,7 @@ public class DaybookService {
         return repository.save(daybook);
     }
 
-    public Daybook update(Daybook daybook) {
+    public Daybook update(Daybook daybook, Long id) {
         return repository.save(daybook);
     }
 
