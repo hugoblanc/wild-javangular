@@ -65,6 +65,15 @@ public class AskAuthorizationDto implements Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "AskAuthorizationDto{" +
+                "redirect_uri='" + redirect_uri + '\'' +
+                ", grant_type='" + grant_type + '\'' +
+                ", client_secret='" + client_secret + '\'' +
+                ", client_id='" + client_id + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }
