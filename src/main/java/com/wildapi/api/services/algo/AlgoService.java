@@ -18,7 +18,7 @@ public class AlgoService {
 
     public Algo save(Algo algo) { return repository.save(algo); }
 
-    public Algo update(Algo algo, Long id) {
+    public Algo update(Algo algo) {
         return repository.save(algo);
     }
 
