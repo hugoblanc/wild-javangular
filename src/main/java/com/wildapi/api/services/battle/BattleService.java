@@ -19,15 +19,16 @@ public class BattleService {
     }
 
     public Battle save(Battle battle) {
-        battle.algoList = initEmptyAlgo(5);
+        battle.algoList = initEmptyAlgo(battle, 5);
         return repository.save(battle);
     }
 
-    private List<Algo> initEmptyAlgo(int nbAlgo){
+    private List<Algo> initEmptyAlgo(Battle battle, int nbAlgo) {
         List<Algo> algos = new ArrayList<>();
         for (int i = 0; i < nbAlgo; i++) {
             Algo algo = new Algo();
-            algo.setTitle("Algo "+i);
+            algo.setTitle("Algo " + i);
+            algo.setBattle(battle);
             algos.add(algo);
         }
         return algos;
