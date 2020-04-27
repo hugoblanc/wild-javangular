@@ -2,9 +2,7 @@ package com.wildapi.api.services.battle;
 
 import com.wildapi.api.services.algo.Algo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +33,6 @@ public class BattleService {
     }
 
     public Battle update(Battle battle, Long id) {
-        if (battle.getId().equals(id)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Inconsistent parameter");
-        }
         return repository.save(battle);
     }
 
