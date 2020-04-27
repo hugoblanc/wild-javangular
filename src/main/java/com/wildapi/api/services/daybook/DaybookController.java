@@ -17,9 +17,6 @@ public class DaybookController {
 
     @GetMapping()
     public List<Daybook> getDaybooks(@RequestParam(name = "start", required = false) @DateTimeFormat(pattern = "MMddyyyy") Date startDate, @RequestParam(name = "end", required = false) @DateTimeFormat(pattern = "MMddyyyy") Date endDate) {
-
-        System.out.println(startDate.toString());
-        System.out.println(endDate.toString());
         return service.getAll(startDate, endDate);
     }
 
