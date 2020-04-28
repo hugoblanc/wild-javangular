@@ -1,12 +1,15 @@
 package com.wildapi.api.core.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -20,6 +23,9 @@ import java.util.List;
 @Order(2)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
+    @Autowired
+    JwtAuthenticationService jwtAuthenticationService;
 
     /**
      * Désactiver les comportements par défaults
@@ -35,7 +41,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling()
                 .and().anonymous()
                 .and().authorizeRequests()
-                .anyRequest().permitAll();
+                .antMatchers("*", "/daybooks/**").permitAll()
+                .antMatchers("*", "/algos/**").permitAll()
+                .antMatchers("*", "/tasks/**").permitAll()
+                .antMatchers("*", "/battles/**").permitAll()
+                .antMatchers("*", "/oauth/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+                .antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/accessible/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/resources/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
+                .anyRequest().fullyAuthenticated()
+                .and()
+                .addFilterBefore(new JwtAuthorizationFilter(jwtAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+        // allow anonymous user regitration
+//                .antMatchers(HttpMethod.POST, "/users").permitAll()
+//                // allow anonymous user regitration
+//                .antMatchers(HttpMethod.GET, "/users/activate2/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/users/registerWithGroup").permitAll()
 
 
     }
