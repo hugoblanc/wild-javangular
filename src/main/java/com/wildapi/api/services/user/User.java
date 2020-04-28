@@ -1,8 +1,11 @@
 package com.wildapi.api.services.user;
 
 import com.wildapi.api.services.crew.Crew;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -31,6 +34,12 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Transient
+//    @JsonIgnore
+    public Set<GrantedAuthority> getAuthorities() {
+        return new HashSet<>();
     }
 
     public String getEmail() {
