@@ -5,10 +5,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired UserRepository repository;
+    @Autowired
+    UserRepository repository;
 
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         return repository.save(user);
+    }
+
+    public User findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }
