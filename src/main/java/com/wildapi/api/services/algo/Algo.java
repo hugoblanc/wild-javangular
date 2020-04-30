@@ -1,14 +1,12 @@
 package com.wildapi.api.services.algo;
 
-import java.sql.Date;
-
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wildapi.api.services.battle.Battle;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 public class Algo {
@@ -16,7 +14,7 @@ public class Algo {
     @Id()
     @GeneratedValue()
     private Long id;
-        
+
     private String title;
 
 
@@ -26,9 +24,13 @@ public class Algo {
 
     private boolean validated;
 
+    private int level;
+
+    private String skeleton;
+
     @CreationTimestamp
     private Date createDate;
-    
+
     @UpdateTimestamp
     private Date modifyDate;
 
@@ -74,6 +76,22 @@ public class Algo {
 
     public boolean isValidated() {
         return validated;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getSkeleton() {
+        return skeleton;
+    }
+
+    public void setSkeleton(String skeleton) {
+        this.skeleton = skeleton;
     }
 
     public void setValidated(boolean validated) {
