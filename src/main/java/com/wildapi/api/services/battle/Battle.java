@@ -3,8 +3,11 @@ package com.wildapi.api.services.battle;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.algo.Algo;
+import com.wildapi.api.services.solution.Solution;
 import com.wildapi.api.services.user.User;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -12,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Battle {
 
     @Id
@@ -21,6 +25,10 @@ public class Battle {
     public String name;
 
     public int level;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "battle", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Solution> solutionList;
 
     @JsonBackReference
     @JoinColumn(name = "creator_id")
@@ -35,6 +43,8 @@ public class Battle {
     @JsonManagedReference
     @OneToMany(mappedBy = "battle", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Algo> algoList;
+    @CreatedDate
+    private Date date;
 
     public Long getId() {
         return id;
@@ -90,5 +100,21 @@ public class Battle {
 
     public void setAlgoList(List<Algo> algoList) {
         this.algoList = algoList;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<Solution> getSolutionList() {
+        return solutionList;
+    }
+
+    public void setSolutionList(List<Solution> solutionList) {
+        this.solutionList = solutionList;
     }
 }
