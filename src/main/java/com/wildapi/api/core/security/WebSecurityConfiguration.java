@@ -41,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling()
                 .and().anonymous()
                 .and().authorizeRequests()
-                .antMatchers("*", "/daybooks/**").permitAll()
+//                .antMatchers("*", "/daybooks/**").permitAll()
                 .antMatchers("*", "/algos/**").permitAll()
                 .antMatchers("*", "/tasks/**").permitAll()
                 .antMatchers("*", "/battles/**").permitAll()

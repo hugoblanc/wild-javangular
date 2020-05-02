@@ -15,6 +15,11 @@ public class UserAuthentication implements Authentication {
         this.user = user;
     }
 
+
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public String getName() {
         return user.getEmail();
