@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.battle.Battle;
 import com.wildapi.api.services.crew.Crew;
 import com.wildapi.api.services.daybook.Daybook;
+import com.wildapi.api.services.solution.Solution;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -32,13 +33,17 @@ public class User {
     private Crew current_crew;
 
 
-    @JsonManagedReference
+    @JsonManagedReference("creator-daybooks")
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Daybook> daybooks;
 
-    @JsonManagedReference
+    @JsonManagedReference("battles-creator")
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Battle> battles;
+
+    @JsonManagedReference("creator-solution")
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Solution> solutions;
 
 
     public Long getId() {
@@ -142,5 +147,13 @@ public class User {
 
     public void setBattles(List<Battle> battles) {
         this.battles = battles;
+    }
+
+    public List<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(List<Solution> solutions) {
+        this.solutions = solutions;
     }
 }
