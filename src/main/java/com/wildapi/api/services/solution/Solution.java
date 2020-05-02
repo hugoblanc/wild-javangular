@@ -13,13 +13,19 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"creator_id", "algo_id", "battle_id"})
+})
 public class Solution {
 
     @Id
     @GeneratedValue()
     private Long id;
 
-    @JsonBackReference
+    private String code;
+
+
+    @JsonBackReference("creator-solution")
     @JoinColumn(name = "creator_id")
     @ManyToOne
     @CreatedBy
@@ -28,14 +34,14 @@ public class Solution {
     @CreatedDate
     private Date postedAt;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference("algo-solutions")
+    @ManyToOne
     @JoinColumn(name = "algo_id")
     private Algo algo;
 
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference("solution-battle")
+    @ManyToOne
     @JoinColumn(name = "battle_id")
     private Battle battle;
 
@@ -45,6 +51,15 @@ public class Solution {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public User getCreator() {

@@ -26,23 +26,21 @@ public class Battle {
 
     public int level;
 
-    @JsonManagedReference
+    @JsonManagedReference("solution-battle")
     @OneToMany(mappedBy = "battle", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Solution> solutionList;
-
-    @JsonBackReference
-    @JoinColumn(name = "creator_id")
-    @ManyToOne
-    @CreatedBy
-    private User creator;
+    @JsonManagedReference(value = "algo-list-battle")
+    @OneToMany(mappedBy = "battle", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Algo> algoList;
 
     public Date launchDate;
 
     public Duration duration;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "battle", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Algo> algoList;
+    @JsonBackReference(value = "battles-creator")
+    @JoinColumn(name = "creator_id")
+    @ManyToOne
+    @CreatedBy
+    private User creator;
     @CreatedDate
     private Date date;
 

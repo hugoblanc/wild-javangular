@@ -37,14 +37,13 @@ public class Algo {
     @UpdateTimestamp
     private Date modifyDate;
 
-    @JsonBackReference
+    @JsonManagedReference("algo-solutions")
+    @OneToMany(mappedBy = "algo", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Solution> solutionList;
+    @JsonBackReference("algo-list-battle")
     @ManyToOne()
     @JoinColumn(name = "battle_id")
     private Battle battle;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "algo", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Solution> solutionList;
 
 
     public Long getId() {
