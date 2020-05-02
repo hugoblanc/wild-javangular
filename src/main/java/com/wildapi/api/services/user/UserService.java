@@ -3,6 +3,8 @@ package com.wildapi.api.services.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -15,5 +17,9 @@ public class UserService {
 
     public User findByEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    public List<User> getAll() {
+        return repository.findAll();
     }
 }
