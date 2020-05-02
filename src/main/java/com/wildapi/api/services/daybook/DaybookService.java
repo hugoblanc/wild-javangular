@@ -1,5 +1,6 @@
 package com.wildapi.api.services.daybook;
 
+import com.wildapi.api.services.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +27,17 @@ public class DaybookService {
         return repository.save(daybook);
     }
 
+
+    public Daybook initEmptyDaybookForUser(User user) {
+        Daybook daybook = new Daybook();
+        return repository.save(daybook);
+    }
+
     public Daybook update(Daybook daybook, Long id) {
         return repository.save(daybook);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 
