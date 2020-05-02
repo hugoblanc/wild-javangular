@@ -1,6 +1,7 @@
 package com.wildapi.api.services.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.wildapi.api.services.battle.Battle;
 import com.wildapi.api.services.crew.Crew;
 import com.wildapi.api.services.daybook.Daybook;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,6 +35,10 @@ public class User {
     @JsonManagedReference
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Daybook> daybooks;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Battle> battles;
 
 
     public Long getId() {
@@ -131,5 +136,11 @@ public class User {
         this.current_crew = current_crew;
     }
 
+    public List<Battle> getBattles() {
+        return battles;
+    }
 
+    public void setBattles(List<Battle> battles) {
+        this.battles = battles;
+    }
 }

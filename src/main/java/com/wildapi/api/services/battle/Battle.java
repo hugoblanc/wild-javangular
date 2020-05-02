@@ -1,7 +1,10 @@
 package com.wildapi.api.services.battle;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.algo.Algo;
+import com.wildapi.api.services.user.User;
+import org.springframework.data.annotation.CreatedBy;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -19,6 +22,11 @@ public class Battle {
 
     public int level;
 
+    @JsonBackReference
+    @JoinColumn(name = "creator_id")
+    @ManyToOne
+    @CreatedBy
+    private User creator;
 
     public Date launchDate;
 
@@ -42,6 +50,14 @@ public class Battle {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public int getLevel() {
