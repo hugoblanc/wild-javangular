@@ -34,7 +34,7 @@ public class Daybook {
     private boolean finished;
 
 
-    @JsonBackReference
+    @JsonBackReference(value = "creator-daybooks")
     @JoinColumn(name = "creator_id")
     @ManyToOne
     @CreatedBy
