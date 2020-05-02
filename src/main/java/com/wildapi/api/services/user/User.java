@@ -1,10 +1,13 @@
 package com.wildapi.api.services.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.crew.Crew;
+import com.wildapi.api.services.daybook.Daybook;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,12 +31,26 @@ public class User {
     private Crew current_crew;
 
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Daybook> daybooks;
+
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public List<Daybook> getDaybooks() {
+        return daybooks;
+    }
+
+    public void setDaybooks(List<Daybook> daybooks) {
+        this.daybooks = daybooks;
     }
 
     @Transient

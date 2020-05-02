@@ -1,13 +1,19 @@
 package com.wildapi.api.services.daybook;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.task.Task;
+import com.wildapi.api.services.user.User;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Daybook {
 
     @Id
@@ -15,13 +21,25 @@ public class Daybook {
     private Long id;
 
 
+    @CreatedDate
     private Date date;
 
     private String theme;
 
+
+    @Column(columnDefinition = "boolean default false")
     private boolean validated;
 
+    @Column(columnDefinition = "boolean default false")
     private boolean finished;
+
+
+    @JsonBackReference
+    @JoinColumn(name = "creator_id")
+    @ManyToOne
+    @CreatedBy
+    private User creator;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "daybook", cascade = CascadeType.ALL)
@@ -75,5 +93,14 @@ public class Daybook {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }
