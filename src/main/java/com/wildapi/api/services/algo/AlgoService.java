@@ -9,20 +9,27 @@ import java.util.List;
 public class AlgoService {
 
 
-    @Autowired AlgoRepository repository;
+    @Autowired
+    AlgoRepository repository;
 
 
-    public List<Algo> getAll(){
+    public List<Algo> getAll() {
         return repository.findAll();
     }
 
-    public Algo save(Algo algo) { return repository.save(algo); }
+    public List<Algo> getAlgosByBattleId(Long battleId) {
+        return repository.findByBattleId(battleId);
+    }
+
+    public Algo save(Algo algo) {
+        return repository.save(algo);
+    }
 
     public Algo update(Algo algo) {
         return repository.save(algo);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 

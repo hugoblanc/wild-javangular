@@ -9,11 +9,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/algos")
 public class AlgoController {
-    @Autowired AlgoService service;
+    @Autowired
+    AlgoService service;
 
     @GetMapping()
     public List<Algo> getAlgos() {
         return service.getAll();
+    }
+
+    @GetMapping("/battle/{battleId}")
+    public List<Algo> getAlgosByBattleId(@PathVariable(value = "battleId") long battleId) {
+        return service.getAlgosByBattleId(battleId);
     }
 
     @PostMapping()
