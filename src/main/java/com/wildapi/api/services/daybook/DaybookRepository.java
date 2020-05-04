@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface DaybookRepository extends JpaRepository<Daybook, Long> {
 
-    List<Daybook> findAllByDateGreaterThanEqualAndDateLessThanEqual(Date start, Date end);
+    List<Daybook> findAllByDateGreaterThanEqualAndDateLessThanEqualAndCreatorId(Date start, Date end, Long id);
+
+    List<Daybook> findByCreatorId(Long id);
 }

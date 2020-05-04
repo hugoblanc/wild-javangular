@@ -1,7 +1,9 @@
 package com.wildapi.api.services.daybook;
 
+import com.wildapi.api.core.security.UserAuthentication;
 import com.wildapi.api.services.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,10 +17,12 @@ public class DaybookService {
 
     public List<Daybook> getAll(Date startDate, Date endDate) {
         List<Daybook> daybooks;
+        UserAuthentication userAuthentication = (UserAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        Long userId = userAuthentication.getUser().getId();
         if (startDate != null && endDate != null) {
-            daybooks = repository.findAllByDateGreaterThanEqualAndDateLessThanEqual(startDate, endDate);
+            daybooks = repository.findAllByDateGreaterThanEqualAndDateLessThanEqualAndCreatorId(startDate, endDate, userId);
         } else {
-            daybooks = repository.findAll();
+            daybooks = repository.findByCreatorId(userId);
         }
         return daybooks;
     }
