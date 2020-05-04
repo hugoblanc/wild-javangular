@@ -1,5 +1,6 @@
 package com.wildapi.api.services.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wildapi.api.services.battle.Battle;
 import com.wildapi.api.services.crew.Crew;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"daybooks", "battles", "solutions"})
 public class User {
 
     @Id()
