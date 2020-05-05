@@ -24,8 +24,8 @@ public class BattleController {
     }
 
     @PutMapping("/{id}")
-    public Battle putBattle(@PathVariable(value = "id") Long id, @RequestBody Battle battle) {
-        return service.update(battle, id);
+    public Battle putBattle(@PathVariable(value = "id") Long id, @RequestBody BattlePutDTO battlePutDTO) {
+        return service.update(battlePutDTO, id);
     }
 
 

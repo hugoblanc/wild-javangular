@@ -1,18 +1,24 @@
 package com.wildapi.api.services.battle;
 
 import com.wildapi.api.services.algo.Algo;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BattleService {
 
-    @Autowired BattleRepository repository;
+    @Autowired
+    BattleRepository repository;
 
-    public List<Battle> getAll(){
+    @Autowired
+    ModelMapper modelMapper;
+
+    public List<Battle> getAll() {
         return repository.findAll();
     }
 
@@ -32,13 +38,19 @@ public class BattleService {
         return algos;
     }
 
-    public Battle update(Battle battle, Long id) {
+    public Battle update(BattlePutDTO battlePutDTO, Long id) {
         System.out.println(id);
-        System.out.println(battle.getId());
-        if (battle.getId().equals(id)) {
+        System.out.println(battlePutDTO.getId());
+        if (battlePutDTO.getId().equals(id)) {
             System.out.println("Is equal");
         }
-        return repository.save(battle);
+
+
+        Optional<Battle> battleOptional = repository.findById(battlePutDTO.getId());
+        Battle entity = battleOptional.get();
+        this.modelMapper.map(battlePutDTO, entity);
+
+        return repository.save(entity);
     }
 
     public void delete(Long id){
