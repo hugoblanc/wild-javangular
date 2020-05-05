@@ -18,6 +18,15 @@ public class Band {
 
     private String kind;
 
+    private Long idUser;
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
 
     public Long getId() {
         return id;

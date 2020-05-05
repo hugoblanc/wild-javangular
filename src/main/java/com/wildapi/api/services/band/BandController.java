@@ -14,8 +14,14 @@ public class BandController {
     BandService service;
 
     @GetMapping()
-    public List<Band> getBands(){
+    public List<Band> getBands() {
         return service.getAll();
+    }
+
+
+    @GetMapping("/user/{id}")
+    public List<Band> getBandByUserId(@PathVariable("id") Long userId) {
+        return service.getByUserId(userId);
     }
 
 

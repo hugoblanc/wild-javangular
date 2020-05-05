@@ -8,19 +8,24 @@ import java.util.List;
 @Service
 public class BandService {
 
-    @Autowired BandRepository repository;
+    @Autowired
+    BandRepository repository;
 
 
-    List<Band> getAll(){
+    List<Band> getAll() {
         return repository.findAll();
     }
 
+    List<Band> getByUserId(Long id) {
+        return repository.findByIdUser(id);
+    }
 
-    Band save(Band band){
+
+    Band save(Band band) {
         return repository.save(band);
     }
 
-    Band update(Band band){
+    Band update(Band band) {
         return repository.save(band);
     }
 
