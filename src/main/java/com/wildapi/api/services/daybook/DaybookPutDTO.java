@@ -1,11 +1,16 @@
 package com.wildapi.api.services.daybook;
 
+import com.wildapi.api.services.task.Task;
+
+import java.util.List;
+
 public class DaybookPutDTO {
 
     private Long id;
     private String theme;
     private boolean validated;
     private boolean finished;
+    private List<Task> taskList;
 
     public Long getId() {
         return id;
@@ -37,5 +42,13 @@ public class DaybookPutDTO {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 }
