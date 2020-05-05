@@ -38,6 +38,7 @@ public class DaybookService {
     }
 
     public Daybook update(Daybook daybook, Long id) {
+        daybook.setCreator(((UserAuthentication) SecurityContextHolder.getContext().getAuthentication()).getUser());
         return repository.save(daybook);
     }
 
