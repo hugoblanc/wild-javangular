@@ -28,8 +28,8 @@ public class AlgoController {
     }
 
     @PutMapping("/{id}")
-    public Algo updateAlgo(@RequestBody Algo algo, @PathVariable(value = "id") long id) {
-        return service.update(algo);
+    public Algo updateAlgo(@RequestBody AlgoPutDTO algoPutDTO, @PathVariable(value = "id") long id) {
+        return service.update(algoPutDTO);
     }
 
     @DeleteMapping("/{id}")
