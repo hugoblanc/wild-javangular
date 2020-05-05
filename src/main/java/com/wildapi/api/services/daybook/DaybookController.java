@@ -35,8 +35,8 @@ public class DaybookController {
     }
 
     @PutMapping("/{id}")
-    public Daybook putDaybook(@RequestBody Daybook daybook, @PathVariable(value = "id") Long id) {
-        return service.update(daybook, id);
+    public Daybook putDaybook(@RequestBody DaybookPutDTO daybookPutDTO, @PathVariable(value = "id") Long id) {
+        return service.update(daybookPutDTO, id);
     }
 
 

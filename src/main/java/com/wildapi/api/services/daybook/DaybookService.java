@@ -2,15 +2,20 @@ package com.wildapi.api.services.daybook;
 
 import com.wildapi.api.core.security.UserAuthentication;
 import com.wildapi.api.services.user.User;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DaybookService {
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @Autowired
     DaybookRepository repository;
@@ -37,9 +42,11 @@ public class DaybookService {
         return repository.save(daybook);
     }
 
-    public Daybook update(Daybook daybook, Long id) {
-        daybook.setCreator(((UserAuthentication) SecurityContextHolder.getContext().getAuthentication()).getUser());
-        return repository.save(daybook);
+    public Daybook update(DaybookPutDTO daybook, Long id) {
+        Optional<Daybook> daybookFromSrv = repository.findById(daybook.getId());
+        Daybook entity = daybookFromSrv.get();
+        this.modelMapper.map(daybook, entity);
+        return repository.save(entity);
     }
 
     public void delete(Long id) {
