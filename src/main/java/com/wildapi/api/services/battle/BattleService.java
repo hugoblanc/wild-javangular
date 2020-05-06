@@ -22,6 +22,10 @@ public class BattleService {
         return repository.findAll();
     }
 
+    public Battle getById(Long id) {
+        return repository.findById(id).get();
+    }
+
     public Battle save(Battle battle) {
         battle.algoList = initEmptyAlgo(battle, 5);
         return repository.save(battle);

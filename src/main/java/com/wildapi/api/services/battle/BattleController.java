@@ -13,10 +13,14 @@ public class BattleController {
     BattleService service;
 
     @GetMapping()
-    public List<Battle> getBattle(){
+    public List<Battle> getBattle() {
         return service.getAll();
     }
 
+    @GetMapping("/{id}")
+    public Battle getBattleById(@PathVariable(value = "id") Long id) {
+        return service.getById(id);
+    }
 
     @PostMapping()
     public Battle postBattle(@RequestBody Battle battle) {
@@ -28,10 +32,11 @@ public class BattleController {
         return service.update(battlePutDTO, id);
     }
 
-
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteBattle(@PathVariable(value = "id") long id) {
         service.delete(id);
     }
+
+
 }
