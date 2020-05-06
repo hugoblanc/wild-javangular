@@ -20,6 +20,7 @@ public class Algo {
 
     private String title;
 
+    private String input;
 
     private String solution;
 
@@ -60,6 +61,14 @@ public class Algo {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public String getSolution() {
