@@ -5,6 +5,7 @@ public class AlgoPutDTO {
     private Long id;
     private String title;
     private String solution;
+    private String input;
     private String instructions;
     private boolean validated;
     private int level;
@@ -33,6 +34,14 @@ public class AlgoPutDTO {
 
     public void setSolution(String solution) {
         this.solution = solution;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public String getInstructions() {
