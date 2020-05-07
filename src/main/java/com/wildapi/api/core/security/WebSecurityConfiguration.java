@@ -43,6 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("*", "/animals/**").permitAll()
                 .antMatchers("*", "/bands/**").permitAll()
+                .antMatchers("*", "/musics/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/battles").permitAll()
                 .antMatchers("*", "/oauth/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
