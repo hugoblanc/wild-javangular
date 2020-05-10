@@ -1,94 +1,47 @@
 package com.wildapi.api.services.oauth;
 
-import com.wildapi.api.core.security.jwt.JwtUtil;
-import com.wildapi.api.services.user.User;
-import com.wildapi.api.services.user.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("oauth")
+@Log4j2
 public class OAuthController {
 
-
-    @Value("${odyssey.callbackUrl}")
-    private String callbackUrl;
 
     @Autowired
     OAuthService oAuthService;
 
-    @Autowired
-    UserService userService;
 
-    @Autowired
-    JwtUtil jwtUtil;
+    @GetMapping("/{appName}")
+    public void setupOAuth(@PathVariable("appName") String appName, @RequestParam(name = "code") String code, HttpServletResponse httpResponse) {
 
+        String token = this.oAuthService.handleOAuthCallback(appName, code);
 
-    @GetMapping()
-    Object setupOAuth(@RequestParam(name = "code") String code, HttpServletResponse httpResponse) {
-        System.out.println("Le super code renvoyé");
-        System.out.println(code);
-
-        User user = this.oAuthService.handleOAuthCallback(code);
-
-        String token = jwtUtil.generateToken(user);
-
+        String finalFrontCallbackUrl = this.oAuthService.getWebSiteUrlByAppName(appName);
         try {
             httpResponse.sendRedirect(
-                    "http://localhost:4200/auth/" + token);
+                    finalFrontCallbackUrl + token);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error("Redirection failed " + e.getMessage());
         }
 
-
-        return userService.saveUser(user);
     }
 
-    @GetMapping("/odyssey")
-    public void redirect(HttpServletResponse httpResponse) {
-
-        Map<String, String> requestParams = new HashMap<>();
-        requestParams.put("client_id", "fc3dfb1962ce7fcdb7b7958e9c6928e78ed030deb8462f7ef9e8db5f47301b5c");
-        requestParams.put("response_type", "code");
-        requestParams.put("redirect_uri", callbackUrl);
-
-        String encodedURL = requestParams.keySet().stream()
-                .map(key -> {
-                    String urlParam = "";
-                    try {
-                        urlParam = key + "=" + encodeValue(requestParams.get(key));
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    return urlParam;
-                })
-                .collect(Collectors.joining("&", "https://odyssey.wildcodeschool.com/oauth/authorize?", ""));
-
+    @GetMapping("/odyssey/{appName}")
+    public void redirect(@PathVariable("appName") String appName, HttpServletResponse httpResponse) {
+        String encodedURL = oAuthService.generateRedirectUrl(appName);
         try {
             httpResponse.sendRedirect(encodedURL);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            log.error("Redirection to odyssey failed" + e.getMessage());
         }
     }
 
-
-    private String encodeValue(String value) throws UnsupportedEncodingException {
-        return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
-    }
 
 }
