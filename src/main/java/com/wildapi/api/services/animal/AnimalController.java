@@ -1,6 +1,7 @@
 package com.wildapi.api.services.animal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,13 @@ public class AnimalController {
     @PostMapping()
     public Animal postTask(@RequestBody Animal animal) {
         return service.save(animal);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteAnimal(@PathVariable(value = "id") long id) {
+        service.delete(id);
     }
 
 }

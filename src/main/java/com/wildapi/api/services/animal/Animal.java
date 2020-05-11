@@ -13,7 +13,7 @@ public class Animal {
 
     private String imageUrl;
 
-    private String scientificName;
+    private String scientific_name;
 
 
     public Long getId() {
@@ -33,10 +33,10 @@ public class Animal {
     }
 
     public String getScientificName() {
-        return scientificName;
+        return scientific_name;
     }
 
     public void setScientificName(String scientificName) {
-        this.scientificName = scientificName;
+        this.scientific_name = scientificName;
     }
 }
