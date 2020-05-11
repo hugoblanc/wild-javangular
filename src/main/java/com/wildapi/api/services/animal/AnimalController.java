@@ -28,15 +28,11 @@ public class AnimalController {
         return service.save(animal);
     }
 
-    @PutMapping("/{name}")
-    public Animal updateAnimal(@RequestBody Animal animal, @PathVariable(value = "name") String name) {
-        return service.update(animal, name);
-    }
 
-    @DeleteMapping("/{name}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteAnimal(@PathVariable(value = "name") String name) {
-        service.delete(name);
+    public void deleteAnimal(@PathVariable(value = "id") long id) {
+        service.delete(id);
     }
 
 }

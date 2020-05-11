@@ -31,19 +31,7 @@ public class AnimalService {
     }
 
 
-    public Animal update(Animal animal, String name) {
-
-        Optional<Animal> optionalAnimal = repository.findByScientificName(animal.getScientificName());
-        // petit soucis ici, je ne comprends pas pourquoi.
-        Animal entity = optionalAnimal.get();
-        this.modelMapper.map(animal, entity);
-
-        return repository.save(entity);
-    }
-
-
-    public void delete(String name) {
-        Animal animal = (Animal) getByScientificName(name);
-        repository.deleteById(animal.getId());
+    public void delete(long id) {
+        repository.deleteById(id);
     }
 }
