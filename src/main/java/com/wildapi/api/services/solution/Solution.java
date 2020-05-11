@@ -25,9 +25,8 @@ public class Solution {
     private String code;
 
 
-    @JsonBackReference("creator-solution")
     @JoinColumn(name = "creator_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @CreatedBy
     private User creator;
 
