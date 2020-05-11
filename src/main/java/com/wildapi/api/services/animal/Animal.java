@@ -32,11 +32,11 @@ public class Animal {
         this.imageUrl = imageUrl;
     }
 
-    public String getScientificName() {
+    public String getScientific_name() {
         return scientific_name;
     }
 
-    public void setScientificName(String scientificName) {
-        this.scientific_name = scientificName;
+    public void setScientific_name(String scientific_name) {
+        this.scientific_name = scientific_name;
     }
 }

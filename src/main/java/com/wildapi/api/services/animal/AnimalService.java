@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AnimalService {
@@ -22,7 +21,7 @@ public class AnimalService {
 
 
     public List<Animal> getByScientificName(String scientificName) {
-        return repository.findByScientificName(scientificName);
+        return repository.findByScientific_name(scientificName);
     }
 
 
