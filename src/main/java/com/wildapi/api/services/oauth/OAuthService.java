@@ -96,7 +96,7 @@ public class OAuthService {
         if (appName.equals("battle")) {
             requestParams.put("redirect_uri", callbackBattleUrl);
         } else if (appName.equals("local")) {
-            requestParams.put("redirect_uri", callbackDaybookkUrl);
+            requestParams.put("redirect_uri", callbackLocalUrl);
         } else {
             requestParams.put("redirect_uri", callbackDaybookkUrl);
         }
