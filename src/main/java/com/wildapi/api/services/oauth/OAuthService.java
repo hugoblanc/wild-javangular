@@ -77,6 +77,8 @@ public class OAuthService {
 
         if (appName.equals("battle")) {
             callbackUrl = callbackBattleUrl;
+        } else if (appName.equals("local")) {
+            callbackUrl = callbackLocalUrl;
         } else {
             callbackUrl = callbackDaybookkUrl;
         }
