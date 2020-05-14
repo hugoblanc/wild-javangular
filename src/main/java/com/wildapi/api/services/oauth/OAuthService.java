@@ -64,8 +64,13 @@ public class OAuthService {
 
         AuthResponseDto authResponse = this.restService.postObject("https://odyssey.wildcodeschool.com/oauth/token", askAuth, AuthResponseDto.class);
         ResponseEntity<OdysseyUserDto> odysseyUserDtoResponseEntity = this.restService.getObject("https://odyssey.wildcodeschool.com/api/v2/me", OdysseyUserDto.class, authResponse.getAccess_token());
-
-        User user = this.modelMapper.map(odysseyUserDtoResponseEntity.getBody(), User.class);
+        OdysseyUserDto odyUserDTO = odysseyUserDtoResponseEntity.getBody();
+        User user = this.modelMapper.map(odyUserDTO, User.class);
+        if (odyUserDTO.getRoles().contains("trainer")) {
+            user.setMain_role("trainer");
+        } else {
+            user.setMain_role("student");
+        }
         user = userService.saveUser(user);
 
         return jwtUtil.generateToken(user);

@@ -1,5 +1,7 @@
 package com.wildapi.api.services.oauth.dto;
 
+import java.util.List;
+
 public class OdysseyUserDto {
     private float id;
     private String email;
@@ -10,6 +12,7 @@ public class OdysseyUserDto {
     private boolean banished;
     private String fullname;
     private String main_role;
+    private List<String> roles;
     private OdysseyCrewDto current_crew;
 
 
@@ -87,6 +90,14 @@ public class OdysseyUserDto {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public void setMain_role(String main_role) {
